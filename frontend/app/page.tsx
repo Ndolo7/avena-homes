@@ -139,17 +139,18 @@ export default function LandingPage() {
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Layered background — adapts to light/dark */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950" />
-        <div className="absolute inset-0">
+        {/* Base Image */}
+        <div className="absolute inset-0 w-[55%]">
           <Image
             src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1920&q=70&auto=format&fit=crop"
             alt=""
             fill
-            className="object-cover opacity-[0.06] dark:opacity-20"
+            className="object-cover opacity-80 dark:opacity-80"
             priority
           />
         </div>
+        {/* Layered background — begins with transparent and goes to white */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-white dark:from-transparent dark:via-slate-950 dark:to-slate-950" />
         <div className="absolute inset-0 hero-grid opacity-30 dark:opacity-100" />
         {/* Glow blobs */}
         <div className="absolute -top-60 -right-60 w-[600px] h-[600px] bg-emerald-400/10 dark:bg-emerald-500/15 rounded-full blur-[120px]" />
@@ -168,7 +169,7 @@ export default function LandingPage() {
               <span className="text-gradient block mt-2">manage rentals</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mb-10 leading-relaxed animate-slide-up">
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-lg mx-auto mb-10 leading-relaxed animate-slide-up">
               Automated invoicing, real-time ledgers, and seamless digital payments for
               Kenyan property owners — all in one modern platform.
             </p>
@@ -205,7 +206,7 @@ export default function LandingPage() {
 
         {/* Property showcase image — right side, desktop only */}
         <div className="absolute right-0 top-0 bottom-0 w-[45%] hidden xl:block overflow-hidden z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-white dark:from-slate-950 to-transparent z-10 w-32" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white dark:from-slate-950 to-transparent z-10 w-96" />
           <Image
             src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1000&q=80&auto=format&fit=crop"
             alt="Modern apartment"
