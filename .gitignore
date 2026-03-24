@@ -1,0 +1,55 @@
+# ── Environment files (NEVER commit) ─────────────────────────────
+.env
+.env.prod
+.env.local
+.env.*.local
+backend/.env
+backend/.env.prod
+frontend/.env.local
+
+# ── Python / Django ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+backend/.venv/
+backend/staticfiles/
+backend/media/
+backend/htmlcov/
+backend/.coverage
+backend/coverage.xml
+backend/.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# ── Next.js ───────────────────────────────────────────────────────
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+frontend/.npm
+frontend/npm-debug.log*
+
+# ── Docker ────────────────────────────────────────────────────────
+*.dockerignore.bak
+
+# ── IDEs ──────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Certs ─────────────────────────────────────────────────────────
+nginx/ssl/
+
+# ── Misc ──────────────────────────────────────────────────────────
+*.log
+*.pid
+celerybeat-schedule
+celerybeat.pid
+
+claude.md
