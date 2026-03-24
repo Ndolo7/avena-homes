@@ -1,0 +1,125 @@
+version: "3.9"
+
+# ── Local development compose ─────────────────────────────────────────────────
+# Uses volumes for hot-reload. Does NOT use the multi-stage Dockerfiles.
+# Run: docker compose up --build
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: avena_homes
+      POSTGRES_USER: avena
+      POSTGRES_PASSWORD: avena_dev_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U avena -d avena_homes"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      target: runtime
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgres://avena:avena_dev_password@postgres:5432/avena_homes
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      DJANGO_SETTINGS_MODULE: config.settings.development
+    volumes:
+      - ./backend:/app
+      - media_files:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+
+  celery_worker:
+    build:
+      context: ./backend
+      target: runtime
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgres://avena:avena_dev_password@postgres:5432/avena_homes
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      DJANGO_SETTINGS_MODULE: config.settings.development
+    volumes:
+      - ./backend:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A config worker -l info
+
+  celery_beat:
+    build:
+      context: ./backend
+      target: runtime
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgres://avena:avena_dev_password@postgres:5432/avena_homes
+      CELERY_BROKER_URL: redis://redis:6379/0
+      DJANGO_SETTINGS_MODULE: config.settings.development
+    volumes:
+      - ./backend:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A config beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
+  frontend:
+    build:
+      context: ./frontend
+      target: deps
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
+      API_BASE_URL: http://backend:8000/api
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: npm run dev
+
+volumes:
+  postgres_data:
+  redis_data:
+  media_files:
