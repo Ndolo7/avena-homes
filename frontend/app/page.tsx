@@ -159,10 +159,10 @@ export default function LandingPage() {
         <div className="relative z-10 w-full px-6 lg:px-12 pt-28 pb-16 flex flex-col items-center">
           <div className="max-w-4xl w-full mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium mb-8 animate-fade-in">
+            {/* <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium mb-8 animate-fade-in">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse-slow" />
               Built for Kenyan landlords · by Avena Softwares
-            </div>
+            </div> */}
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white leading-[1.05] mb-6 animate-slide-up">
               The smarter way to
@@ -246,34 +246,152 @@ export default function LandingPage() {
       </div>
 
       {/* ── Features ──────────────────────────────────────────────────────── */}
-      <section id="features" className="py-24 bg-white dark:bg-slate-900">
-        <div className="w-full px-6 lg:px-12">
-          <div className="max-w-2xl mb-16">
-            <p className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm uppercase tracking-widest mb-3">
+      <section id="features" className="py-32 bg-white dark:bg-slate-900 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-emerald-50 dark:bg-emerald-900/20 blur-3xl opacity-60 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[30rem] h-[30rem] rounded-full bg-teal-50 dark:bg-teal-900/20 blur-3xl opacity-60 pointer-events-none" />
+
+        <div className="relative w-full px-6 lg:px-12 max-w-[1400px] mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-24">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold uppercase tracking-widest mb-6">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
               Everything you need
-            </p>
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
               Built for serious landlords
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-lg leading-relaxed">
+            <p className="text-xl text-slate-500 dark:text-slate-400 leading-relaxed">
               From a single bedsitter to a 200-unit complex — Avena Homes scales with your portfolio at every stage.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="group p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800/50 hover:shadow-xl dark:hover:shadow-slate-900/50 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-300"
-              >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center border mb-4 ${featureColors[f.color]}`}>
-                  <Ico d={f.icon} />
+          <div className="space-y-32">
+            {/* Feature 1: Portfolio Management (Image Right) */}
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+              <div className="flex-1 lg:pr-10">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center mb-8 border border-emerald-200 dark:border-emerald-500/30 shadow-inner">
+                  <Ico d={features[0].icon} className="w-7 h-7 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white mb-2 text-[15px]">{f.title}</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{f.description}</p>
+                <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                  Total <span className="text-emerald-500">visibility</span> into your properties
+                </h3>
+                <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                  {features[0].description} Say goodbye to scattered spreadsheets and notebooks. Get a real-time bird&apos;s-eye view of your entire real estate empire.
+                </p>
+                <ul className="space-y-4">
+                  {['Track occupancy & vacancies instantly', 'Manage unlimited properties and units', 'Centralized tenant document storage'].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-slate-700 dark:text-slate-300 font-medium">
+                      <span className="w-6 h-6 rounded-full bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
+              <div className="flex-1 w-full">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 aspect-[4/3] group">
+                  <Image src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop" alt="Portfolio Management" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 2: Automated Invoicing (Image Left) */}
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+              <div className="flex-1 lg:pl-10">
+                <div className="w-14 h-14 rounded-2xl bg-teal-100 dark:bg-teal-500/20 flex items-center justify-center mb-8 border border-teal-200 dark:border-teal-500/30 shadow-inner">
+                  <Ico d={features[1].icon} className="w-7 h-7 text-teal-600 dark:text-teal-400" />
+                </div>
+                <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                  <span className="text-teal-500">Automated</span> billing that never sleeps
+                </h3>
+                <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                  {features[1].description} Your tenants receive SMS and email invoices exactly when they are supposed to, without any manual intervention.
+                </p>
+                <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden">
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-teal-500" />
+                  <p className="font-medium text-slate-900 dark:text-white mb-1">Invoice #INV-2026-001</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Sent automatically on 1st March</p>
+                  <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 mb-2">
+                    <div className="bg-teal-500 h-2 rounded-full" style={{ width: '100%' }}></div>
+                  </div>
+                  <p className="text-xs text-teal-600 dark:text-teal-400 font-bold text-right tracking-wider uppercase">PAID IN FULL</p>
+                </div>
+              </div>
+              <div className="flex-1 w-full">
+                <div className="relative justify-center lg:justify-start flex">
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 aspect-square w-full max-w-[500px] z-10 group">
+                    <Image src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format&fit=crop" alt="Automated Invoicing" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-teal-900/60 to-transparent" />
+                  </div>
+                  {/* Decorative offset card */}
+                  <div className="absolute -bottom-8 -right-8 w-64 rounded-2xl bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 p-5 z-20 hidden md:block animate-float">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center"><Ico d="M12 6v6m0 0v6m0-6h6m-6 0H6" className="w-4 h-4 text-teal-600" /></div>
+                      <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded">Just now</span>
+                    </div>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">Invoice Generated</p>
+                    <p className="text-xs text-slate-500 mt-1">KES 35,000 to John Doe</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 3: Seamless Payments (Image Right) */}
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+              <div className="flex-1 lg:pr-10">
+                <div className="w-14 h-14 rounded-2xl bg-cyan-100 dark:bg-cyan-500/20 flex items-center justify-center mb-8 border border-cyan-200 dark:border-cyan-500/30 shadow-inner">
+                  <Ico d={features[2].icon} className="w-7 h-7 text-cyan-600 dark:text-cyan-400" />
+                </div>
+                <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                  Frictionless <span className="text-cyan-500">M-Pesa</span> & Bank payments
+                </h3>
+                <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                  {features[2].description} Eliminate payment disputes and the dreaded "I sent the money" phone calls with our modern webhooks.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {['M-Pesa Express', 'Paybill', 'Visa', 'Mastercard', 'RTGS'].map(tag => (
+                    <span key={tag} className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex-1 w-full">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 aspect-[4/3] group">
+                  <Image src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop" alt="Seamless Payments" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-2xl">
+                      <Ico d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" className="w-10 h-10 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          {/* Secondary Features Grid (Bento style) */}
+          <div className="mt-32 pt-20 border-t border-slate-200 dark:border-slate-800">
+            <div className="text-center mb-16">
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">But wait, there's more</h3>
+              <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Advanced features to make your property management experience buttery smooth.</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {features.slice(3).map((f) => (
+                <div key={f.title} className="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-sm border ${featureColors[f.color]}`}>
+                    <Ico d={f.icon} />
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{f.title}</h4>
+                  <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
+                    {f.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -353,45 +471,63 @@ export default function LandingPage() {
       </section>
 
       {/* ── How it works ──────────────────────────────────────────────────── */}
-      <section id="how-it-works" className="py-24 bg-white dark:bg-slate-900">
-        <div className="w-full px-6 lg:px-12">
-          <div className="max-w-2xl mb-16">
-            <p className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm uppercase tracking-widest mb-3">
+      <section id="how-it-works" className="py-32 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
+        <div className="w-full px-6 lg:px-12 max-w-[1200px] mx-auto relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-20 animate-slide-up">
+            <p className="text-emerald-600 dark:text-emerald-400 font-bold text-sm uppercase tracking-widest mb-3">
               Simple setup
             </p>
-            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
               Up and running in minutes
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-lg">
-              No technical expertise needed. If you can manage a phone, you can manage your portfolio on Avena Homes.
+            <p className="text-lg text-slate-500 dark:text-slate-400">
+              No technical expertise needed. If you can use a smartphone, you can manage your entire portfolio on Avena Homes.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            {steps.map((s, i) => (
-              <div key={s.step} className="relative group">
-                {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-20 left-full w-full h-px bg-gradient-to-r from-slate-200 dark:from-slate-700 to-transparent -translate-x-4 z-0" />
-                )}
-                <div className="relative z-10">
-                  {/* Step image */}
-                  <div className="relative h-48 rounded-2xl overflow-hidden mb-6 border border-slate-200 dark:border-slate-700">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={s.img}
-                      alt={s.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                    <div className="absolute top-4 left-4">
-                      <span className="text-4xl font-black text-white/30 select-none leading-none">{s.step}</span>
+          <div className="relative">
+            {/* The vertical flow line connecting the dots */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-100 via-teal-200 to-cyan-100 dark:from-emerald-900/40 dark:via-teal-800/40 dark:to-cyan-900/40 -translate-x-1/2 rounded-full z-0" />
+            
+            <div className="space-y-16 md:space-y-24 relative z-10">
+              {steps.map((s, i) => (
+                <div key={s.step} className="group relative flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
+                  {/* Left or Right content depending on index */}
+                  <div className={`w-full md:w-5/12 ${i % 2 === 0 ? 'md:order-1 text-left md:text-right md:pr-12' : 'md:order-3 text-left md:pl-12'}`}>
+                    <div className={`inline-block px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-black text-emerald-600 dark:text-emerald-400 mb-4 ${i % 2 === 0 ? 'md:mr-0 md:ml-auto' : ''}`}>
+                      Step {s.step}
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">{s.title}</h3>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                      {s.description}
+                    </p>
+                  </div>
+
+                  {/* The central dot */}
+                  <div className="hidden md:flex flex-col items-center justify-center order-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-50 dark:border-slate-950 z-20 shadow-[0_0_0_4px_rgba(16,185,129,0.1)] dark:shadow-[0_0_0_4px_rgba(16,185,129,0.05)] group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 shadow-inner" />
+                  </div>
+
+                  {/* Image container */}
+                  <div className={`w-full md:w-5/12 ${i % 2 === 0 ? 'md:order-3 md:pl-12' : 'md:order-1 md:pr-12'}`}>
+                    <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 group-hover:-translate-y-2 transition-transform duration-500">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={s.img}
+                        alt={s.title}
+                        className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-emerald-900/10 dark:bg-emerald-900/20 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{s.title}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 leading-relaxed">{s.description}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            
+            {/* End of flow dot */}
+            <div className="hidden md:flex items-center justify-center absolute left-1/2 bottom-0 translate-y-full -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-b from-cyan-100 to-transparent dark:from-cyan-900/40 z-0">
+              <div className="w-2 h-2 rounded-full bg-cyan-400 dark:bg-cyan-500 opacity-50" />
+            </div>
           </div>
         </div>
       </section>
